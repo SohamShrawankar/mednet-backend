@@ -1,0 +1,498 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MedNet Labs Admin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <div class="sidebar-header">
+            <h2>MEDNET LABS</h2>
+        </div>
+
+        <ul class="nav-links">
+
+            <ul class="nav-links">
+
+                <li>
+                    <button class="nav-item active" onclick="showTab('tab1',this)">
+                        Dropdown
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab2',this)">
+                        Popup Editor
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab3',this)">
+                        Patient List
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab4',this)">
+                        Prefix Entry
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab5',this)">
+                        Excel Ops
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab6',this)">
+                        Web Service
+                    </button>
+                </li>
+
+                <li>
+                    <button class="nav-item" onclick="showTab('tab7',this)">
+                        PDF Report
+                    </button>
+                </li>
+
+            </ul>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="content">
+
+
+        <!-- TAB 1 -->
+
+        <div id="tab1" class="tab active">
+
+            <div class="card">
+
+                <h2>Patient Filters</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Prefix</label>
+                        <select class="modern-select">
+                            <option>Mr</option>
+                            <option>Mrs</option>
+                            <option>Miss</option>
+                            <option>Dr</option>
+                            <option>Prof</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="modern-select">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="modern-select">
+                            <option>Active</option>
+                            <option>Under Treatment</option>
+                            <option>Discharged</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="modern-select">
+                            <option>General Medicine</option>
+                            <option>Cardiology</option>
+                            <option>Neurology</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Visit Type</label>
+                        <select class="modern-select">
+                            <option>New Visit</option>
+                            <option>Follow-up</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <select class="modern-select">
+                            <option>Mumbai</option>
+                            <option>Thane</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="button-row spread">
+
+                    <button class="btn btn-primary">Apply Filters</button>
+
+                    <button class="btn btn-ghost">Reset</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 2 -->
+
+        <div id="tab2" class="tab">
+
+            <div class="card">
+
+                <h2>Patient Information Editor</h2>
+
+                <p>
+                    Manage clinical notes and detailed patient records using our secure editor.
+                </p>
+
+                <div class="button-row">
+
+                    <button class="btn btn-primary" onclick="openModal()">
+                        Open Clinical Editor
+                    </button>
+
+                    <button class="btn btn-ghost">
+                        View Guidelines
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 3 -->
+
+        <div id="tab3" class="tab">
+
+            <div class="card">
+
+                <h2>Patient List</h2>
+
+                <div class="toolbar">
+
+                    <input
+                            type="text"
+                            id="searchInput"
+                            class="modern-input"
+                            placeholder="Search by name..."
+                            onkeyup="searchTable()"
+                    >
+
+                    <div class="button-row">
+
+                        <button class="btn btn-ghost">Export CSV</button>
+
+                        <button class="btn btn-primary" onclick="openModal()">
+                            New Patient
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table id="patientTable">
+
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Status</th>
+                            <th>Registered</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 4 -->
+
+        <div id="tab4" class="tab">
+
+            <div class="card">
+
+                <h2>Manage Prefixes</h2>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Prefix Name</label>
+                        <input class="modern-input" id="prefixName" placeholder="e.g Dr">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="modern-select" id="prefixGender">
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Universal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prefix Of</label>
+                        <input class="modern-input" id="prefixOf" placeholder="e.g Doctors">
+                    </div>
+
+                </div>
+
+
+                <div class="button-row">
+
+                    <button class="btn btn-primary" onclick="savePrefix()">
+                        Save Prefix
+                    </button>
+
+                    <button class="btn btn-ghost" onclick="loadPrefixes()">
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="table-container mt-20">
+
+                    <table id="prefixTable">
+
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Category</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody></tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 5 -->
+
+        <div id="tab5" class="tab">
+
+            <div class="card">
+
+                <h2>Excel Data Operations</h2>
+
+                <div class="button-row">
+
+                    <button class="btn btn-primary" onclick="downloadExcel()">
+                        Download Excel
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        Empty Template
+                    </button>
+
+                </div>
+
+                <br>
+
+                <input type="file" id="excelFile" class="modern-input">
+
+                <div class="button-row">
+
+                    <button class="btn btn-secondary" onclick="uploadExcel()">
+                        Upload Excel
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 6 -->
+
+        <div id="tab6" class="tab">
+
+            <div class="card">
+
+                <h2>Web Service</h2>
+
+                <div class="button-row">
+
+                    <button class="btn btn-primary" onclick="loadPrefixesWS()">
+                        Refresh Service Data
+                    </button>
+
+                    <button class="btn btn-secondary" onclick="loadPrefixes()">
+                        Sync Prefix Table
+                    </button>
+
+                </div>
+
+                <ul id="wsPrefixList" class="data-list"></ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- TAB 7 -->
+
+        <div id="tab7" class="tab">
+
+            <div class="card text-center">
+
+                <h2>Clinical Reports</h2>
+
+                <p>
+                    Generate a professional PDF report.
+                </p>
+
+                <div class="button-row">
+
+                    <button class="btn btn-primary" onclick="downloadPDF()">
+                        Generate PDF
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        Preview Report
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- MODAL -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h3>Patient Information Editor</h3>
+
+            <button class="btn btn-ghost" onclick="closeModal()">✕</button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="form-grid">
+
+                <input id="patientName" class="modern-input" placeholder="Patient Name">
+                <input id="patientId" class="modern-input" placeholder="Patient ID">
+
+                <input id="patientReg" type="date" class="modern-input">
+                <input id="patientAge" type="number" class="modern-input" placeholder="Age">
+
+                <select id="patientGender" class="modern-select">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+
+                <select id="patientStatus" class="modern-select">
+                    <option>Active</option>
+                    <option>Under Treatment</option>
+                    <option>Discharged</option>
+                    <option>Inactive</option>
+                </select>
+
+            </div>
+
+            <br>
+
+            <label>Clinical Notes</label>
+
+            <div class="editor-container">
+
+                <div class="editor-toolbar">
+
+                    <button onclick="format('bold')">B</button>
+                    <button onclick="format('italic')">I</button>
+                    <button onclick="format('underline')">U</button>
+
+                </div>
+
+                <div id="editor" contenteditable="true" class="editor-box"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+
+            <button class="btn btn-primary" onclick="savePatient()">Save Patient</button>
+
+            <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
